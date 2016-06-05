@@ -1,5 +1,5 @@
 exports.config = {
-  baseUrl: 'http://localhost:8080/',
+  // baseUrl: 'http://localhost:8080/',
 
   specs: [
     'src/**/*.e2e-spec.js'
@@ -20,7 +20,10 @@ exports.config = {
   directConnect: true,
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+      // binary: './node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron'  // < IMPORTANT!
+    },
   },
 
   onPrepare: function () {
