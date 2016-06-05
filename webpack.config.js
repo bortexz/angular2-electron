@@ -190,7 +190,12 @@ module.exports = function makeWebpackConfig() {
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd})
+      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd}),
+
+      // Added other sources when no test, to get images and css when running electron
+      new CopyWebpackPlugin([{
+        from: root('src/public')
+      }])
     );
   }
 

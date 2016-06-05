@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf node_modules doc dist && npm cache clean",
+    "clean": "rimraf node_modules doc dist coverage && npm cache clean",
+    "clean-generated": "rimraf dist doc coverage",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
     "build": "rimraf dist && webpack --progress --profile --bail",
-    "server": "webpack-dev-server --inline --progress --port 8080",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
@@ -19,9 +19,8 @@
     "test-watch": "karma start --no-single-run --auto-watch",
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
-    "start": "npm run server",
-    "postinstall": "npm run webdriver-update && typings install",
-    "electron": "npm run build && electron main.js"
+    "start": "rimraf dist && webpack --progress --profile --bail && electron main.js",
+    "postinstall": "npm run webdriver-update && typings install"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
