@@ -22,7 +22,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      // binary: './node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron'  // < IMPORTANT!
+      binary: './App-darwin-x64/App.app/Contents/MacOS/App'  // < IMPORTANT!
     },
   },
 

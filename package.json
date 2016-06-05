@@ -1,10 +1,11 @@
 {
   "name": "app",
+  "productName": "App",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf node_modules doc dist coverage && npm cache clean",
-    "clean-generated": "rimraf dist doc coverage",
+    "clean-generated": "rimraf dist doc coverage App-*",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
@@ -19,7 +20,7 @@
     "test-watch": "karma start --no-single-run --auto-watch",
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
-    "start": "rimraf dist && webpack --progress --profile --bail && electron main.js",
+    "start": "rimraf dist && webpack --progress --profile --bail && electron .",
     "postinstall": "npm run webdriver-update && typings install"
   },
   "dependencies": {
@@ -36,11 +37,12 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0",
     "autoprefixer": "^6.3.2",
     "codelyzer": "0.0.19",
     "copy-webpack-plugin": "^3.0.0",
     "css-loader": "^0.23.0",
+    "electron-packager": "^7.0.3",
+    "electron-prebuilt": "^1.2.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
     "html-loader": "^0.4.0",
@@ -62,7 +64,7 @@
     "null-loader": "0.1.1",
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-loader": "^0.9.1",
-    "protractor": "^3.1.1",
+    "protractor": "^3.3.0",
     "raw-loader": "0.5.1",
     "remap-istanbul": "^0.6.4",
     "rimraf": "^2.5.1",

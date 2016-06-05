@@ -1,7 +1,7 @@
 describe('Home', function () {
 
-  beforeEach(function () {
-    browser.get('/');
+  beforeEach(function() {
+      element(by.css('my-app header nav a:first-child')).click();
   });
 
   it('should have <my-home>', function () {
