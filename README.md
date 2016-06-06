@@ -11,3 +11,5 @@ Changes applied (Work in progress):
 - Added coverage folder to delete in clean rules. Added clean rule to delete everything except node_modules.
 - Modified npm start to run with electron instead of starting a server.
 - Removed webpack-dev-server.
+- Added electron packager to build the app.
+- Added about test.

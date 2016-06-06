@@ -56,3 +56,6 @@ __build__/**
 
 # Generated packages
 App-*
+
+# vscode for now
+.vscode
