@@ -12,7 +12,7 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log('Hello About');
+    console.log('Hello About');
   }
 
 }
