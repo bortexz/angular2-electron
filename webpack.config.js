@@ -33,7 +33,7 @@ module.exports = function makeWebpackConfig() {
   if (isProd) {
     config.devtool = 'source-map';
   } else {
-    config.devtool = 'inline-source-map';
+    config.devtool = 'eval-source-map';
   }
 
   // add debug messages
@@ -65,7 +65,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#resolve
    */
   config.resolve = {
-    cache: !isTest,
+    cache: false,
     root: root(),
     // only discover files that have those extensions
     extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
