@@ -18,7 +18,7 @@ var electron = require('electron-connect').server.create();
 var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
-var isWatching = ENV === 'watch' || ENV === 'start-watch'
+var isWatching = ENV === 'start-watch'
 
 module.exports = function makeWebpackConfig() {
   /**
