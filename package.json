@@ -33,7 +33,6 @@
     "@angular/router-deprecated": "2.0.0-rc.1",
     "electron-connect": "^0.4.2",
     "es6-shim": "^0.35.0",
-    "on-build-webpack": "^0.1.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
     "zone.js": "0.6.12"
@@ -64,6 +63,7 @@
     "karma-webpack": "1.7.0",
     "node-sass": "^3.4.2",
     "null-loader": "0.1.1",
+    "on-build-webpack": "^0.1.0",
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-loader": "^0.9.1",
     "protractor": "^3.3.0",
