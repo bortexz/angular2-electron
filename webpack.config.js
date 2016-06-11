@@ -8,6 +8,8 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WebpackOnBuildPlugin = require('on-build-webpack');
+var electron = require('electron-connect').server.create();
 
 /**
  * Env
@@ -16,6 +18,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
+var isWatching = ENV === 'watch' || ENV === 'start-watch'
 
 module.exports = function makeWebpackConfig() {
   /**
@@ -184,7 +187,8 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
         template: './src/public/index.html',
-        chunksSortMode: 'dependency'
+        chunksSortMode: 'dependency',
+        cache: !(ENV === 'start-watch') // Cache disabled to work with --watch option
       }),
 
       // Extract css files
@@ -196,6 +200,22 @@ module.exports = function makeWebpackConfig() {
       new CopyWebpackPlugin([{
         from: root('src/public')
       }])
+
+      // Add the function to launch the electron after build succeed, from webpack
+      // Allowing live-reload aswell that way
+    );
+  }
+
+  if (isWatching) {
+    config.plugins.push(
+      new WebpackOnBuildPlugin(function(stats) {
+        if (!config.reload) {
+          config.reload = true;
+          electron.start();
+        } else {
+          electron.reload();
+        }
+      })
     );
   }
 
@@ -216,13 +236,13 @@ module.exports = function makeWebpackConfig() {
         // Angular 2 is broken again, disabling mangle until beta 6 that should fix the thing
         // Todo: remove this with beta 6
         mangle: false
-      }),
+      })
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
-      new CopyWebpackPlugin([{
-        from: root('src/public')
-      }])
+      // new CopyWebpackPlugin([{
+      //   from: root('src/public')
+      // }])
     );
   }
 
@@ -253,17 +273,6 @@ module.exports = function makeWebpackConfig() {
   config.tslint = {
     emitErrors: false,
     failOnHint: false
-  };
-
-  /**
-   * Dev server configuration
-   * Reference: http://webpack.github.io/docs/configuration.html#devserver
-   * Reference: http://webpack.github.io/docs/webpack-dev-server.html
-   */
-  config.devServer = {
-    contentBase: './src/public',
-    historyApiFallback: true,
-    stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
 
   config.target = 'electron-renderer';

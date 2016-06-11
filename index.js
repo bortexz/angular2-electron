@@ -1,4 +1,5 @@
 const electron = require('electron')
+const livereload = require('electron-connect').client
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -7,13 +8,17 @@ const BrowserWindow = electron.BrowserWindow
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-
+const npm_lifecycle = process.env.npm_lifecycle_event
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
+
+  if (npm_lifecycle === 'start-watch') {
+    livereload.create(mainWindow)
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
