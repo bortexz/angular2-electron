@@ -22,7 +22,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      binary: './App-darwin-x64/App.app/Contents/MacOS/App'  // < IMPORTANT!
+      binary: './App-darwin-x64/App.app/Contents/MacOS/App'
     },
   },
 

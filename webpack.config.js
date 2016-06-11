@@ -266,6 +266,8 @@ module.exports = function makeWebpackConfig() {
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
 
+  config.target = 'electron-renderer';
+
   return config;
 }();
 
