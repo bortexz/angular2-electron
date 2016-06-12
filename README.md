@@ -24,9 +24,6 @@ watch has been renamed to start-watch. The electron will start in livereload pro
 ```
 npm run start-watch
 ```
-##e2e testing
-I don't know yet any service to run e2e electron testing on a CI server. For now, the option locally would be to run the e2e with a build generated with protractor.
-For this, a script needs to be written to run the electron-package only for current platform, having a switch in the protractor file to select this generated binary to run the e2e locally.
 
 ##Electron livereload
 Support for electron livereload with [electron-connect](https://www.npmjs.com/package/electron-connect) and [on-webpack-build](https://www.npmjs.com/package/on-build-webpack).
