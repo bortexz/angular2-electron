@@ -20,14 +20,14 @@ This will run the build process and the application once.
 ```
 npm run start
 ```
-watch has been renamed to start-watch. The electron will start in livereload process. See [electron livereload below](#Electron-livereload)
+watch has been renamed to start-watch. The electron will start in livereload process. See electron livereload below.
 ```
 npm run start-watch
 ```
 
 ##Electron livereload
 Support for electron livereload with [electron-connect](https://www.npmjs.com/package/electron-connect) and [on-webpack-build](https://www.npmjs.com/package/on-build-webpack).
-When running start-watch script, the electron instane is run from the electron-connect client instead of running "electron ."
+When running start-watch script, the electron instance is run from the electron-connect client instead of running "electron ."
 
 This code has been added to webpack to run the electron
 ```
@@ -50,7 +50,7 @@ var isWatching = ENV === 'start-watch'
 
 ```
 
-with this in the index.js, to run only when the npm lifecycle is start-watch
+Also this has been added to index.js, to run only when the npm lifecycle is start-watch
 ```
 const livereload = require('electron-connect').client
 ...
@@ -62,6 +62,5 @@ const npm_lifecycle = process.env.npm_lifecycle_event
 
 ```
 
-
 ##Other
-- Delete dependency and rules of development web servers.
+- Deleted dependency and rules of development web servers.
