@@ -55,6 +55,7 @@
     "karma": "0.13.22",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.0.0",
+    "karma-electron-launcher": "^0.1.0",
     "karma-jasmine": "^1.0.2",
     "karma-mocha-reporter": "^2.0.3",
     "karma-phantomjs-launcher": "^1.0.0",

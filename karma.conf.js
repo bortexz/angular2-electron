@@ -55,10 +55,6 @@ module.exports = function (config) {
       timeoutNoMoreFiles: 1000 // default value
     },
 
-    webpackServer: {
-      noInfo: true // please don't spam the console when running in karma!
-    },
-
     // test results reporter to use
     // possible values: 'dots', 'progress', 'mocha'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -79,7 +75,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'], // you can also use Chrome
+    browsers: ['Electron'], // you can also use Chrome
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
