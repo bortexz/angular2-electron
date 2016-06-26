@@ -1,4 +1,17 @@
 let os = require('os')
+
+// Aux function to get the binary to use for e2e, depending on platform
+function getChromeBinary () {
+  let platform = os.platform()
+  let arch = os.arch()
+  if (platform === 'darwin') {
+    return `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
+  }
+  if (platform === 'linux') {
+    return `./out/App-linux-${arch}/App`
+  }
+}
+
 exports.config = {
   // baseUrl: 'http://localhost:8080/',
 
@@ -19,22 +32,12 @@ exports.config = {
     defaultTimeoutInterval: 400000
   },
   directConnect: true,
-  // Aux function to get the binary to use for e2e, depending on platform
-  getChromeBinary () {
-    let platform = os.platform()
-    let arch = os.arch()
-    if (platform === 'darwin') {
-      return `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
-    }
-    if (platform === 'linux') {
-      return `./out/App-linux-${arch}/App`
-    }
-  },
+
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
       // binary: './out/App-darwin-x64/App.app/Contents/MacOS/App'
-      binary: this.getChromeBinary()
+      binary: getChromeBinary()
     },
   },
 
@@ -45,7 +48,6 @@ exports.config = {
 
     // browser.ignoreSynchronization = true;
   },
-
 
   /**
    * Angular 2 configuration
