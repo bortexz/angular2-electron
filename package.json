@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf node_modules doc dist coverage && npm cache clean",
-    "clean-generated": "rimraf dist doc coverage App-*",
+    "clean": "rimraf node_modules doc dist coverage out && npm cache clean",
+    "clean-generated": "rimraf dist doc coverage out",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean-install && npm start",
     "build": "rimraf dist && webpack --progress --profile --bail",

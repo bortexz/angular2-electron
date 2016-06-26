@@ -1,16 +1,13 @@
-let os = require('os')
-
-// Aux function to get the binary to use for e2e, depending on platform
-function getChromeBinary () {
-  let platform = os.platform()
-  let arch = os.arch()
-  if (platform === 'darwin') {
-    return `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
-  }
-  if (platform === 'linux') {
-    return `./out/App-linux-${arch}/App`
-  }
-}
+// let os = require('os')
+// let platform = os.platform()
+// let arch = os.arch()
+// let chromeBinary
+// if (platform === 'darwin') {
+//   chromeBinary = `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
+// }
+// if (platform === 'linux') {
+//   chromeBinary = `./out/App-linux-${arch}/App`
+// }
 
 exports.config = {
   // baseUrl: 'http://localhost:8080/',
@@ -36,9 +33,12 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      // binary: './out/App-darwin-x64/App.app/Contents/MacOS/App'
-      binary: getChromeBinary()
+       //binary: `./out/App-darwin-${'x64'}/App.app/Contents/MacOS/App`
+      //binary: chromeBinary
+      binary: `./out/App-linux-x64/App`
     },
+    chrome.Only: true,
+    directConnect: true
   },
 
   onPrepare: function () {

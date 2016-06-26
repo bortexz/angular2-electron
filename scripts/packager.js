@@ -27,6 +27,7 @@ function build () {
       debug('Cannot get or create the otuput folder', err)
       return
     }
+
     let platform, arch
     if (platformToBuild === 'current') {
       let current
@@ -42,7 +43,6 @@ function build () {
       platform = platformToBuild
       arch = archToBuild
     }
-
     let options = {
       platform,
       arch,
@@ -60,13 +60,13 @@ function build () {
 
 function detectCurrent () {
   // detect OS and build specific
-  let osPlatform = os.platform()
-  let osArch = os.arch()
-  if (supportedPlatforms.indexOf(osPlatform) === -1 || supportedArchs.indexOf(osArch) === -1) {
+  let platform = os.platform()
+  let arch = os.arch()
+  if (supportedPlatforms.indexOf(platform) === -1 || supportedArchs.indexOf(arch) === -1) {
     throw new Error('Cannot build for this platform')
   }
 
-  return {osPlatform, osArch}
+  return {platform, arch}
 }
 
 build()
