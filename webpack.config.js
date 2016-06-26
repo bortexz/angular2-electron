@@ -16,7 +16,7 @@ var electron = require('electron-connect').server.create();
  * Get npm lifecycle event to identify the environment
  */
 var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test' || ENV === 'test-watch';
+var isTest = ENV === 'test' || ENV === 'test-watch' || ENV === 'e2e';
 var isProd = ENV === 'build';
 var isWatching = ENV === 'start-watch'
 
@@ -91,6 +91,7 @@ module.exports = function makeWebpackConfig() {
       {
         test: /\.ts$/,
         loader: 'ts',
+        include: root('src'),
         query: {
           'ignoreDiagnostics': [
             2403, // 2403 -> Subsequent variable declarations
