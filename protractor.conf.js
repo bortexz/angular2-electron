@@ -36,9 +36,7 @@ exports.config = {
        //binary: `./out/App-darwin-${'x64'}/App.app/Contents/MacOS/App`
       //binary: chromeBinary
       binary: `./out/App-linux-x64/App`
-    },
-    chrome.Only: true,
-    directConnect: true
+    }
   },
 
   onPrepare: function () {
