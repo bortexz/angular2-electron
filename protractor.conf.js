@@ -1,3 +1,4 @@
+let os = require('os')
 exports.config = {
   // baseUrl: 'http://localhost:8080/',
 
@@ -18,12 +19,22 @@ exports.config = {
     defaultTimeoutInterval: 400000
   },
   directConnect: true,
-
+  // Aux function to get the binary to use for e2e, depending on platform
+  getChromeBinary () {
+    let platform = os.platform()
+    let arch = os.arch()
+    if (platform === 'darwin') {
+      return `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
+    }
+    if (platform === 'linux') {
+      return `./out/App-linux-${arch}/App`
+    }
+  },
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      binary: './node_modules/.bin/electron',
-      args: ['index.js']
+      // binary: './out/App-darwin-x64/App.app/Contents/MacOS/App'
+      binary: this.getChromeBinary()
     },
   },
 
@@ -32,7 +43,7 @@ exports.config = {
     // add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
 
-    browser.ignoreSynchronization = true;
+    // browser.ignoreSynchronization = true;
   },
 
 
