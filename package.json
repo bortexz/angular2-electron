@@ -18,7 +18,7 @@
     "pretest": "npm run lint",
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch",
-    "ci": "npm run e2e && npm run test",
+    "ci": "npm run test && npm run e2e",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "rimraf dist && webpack --progress --profile --bail && electron .",
     "start-watch": "rimraf dist && webpack --progress --profile --bail --watch",
