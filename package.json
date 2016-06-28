@@ -16,9 +16,9 @@
     "e2e-live": "npm run package-e2e && protractor --elementExplorer",
     "package-e2e": "node scripts/packager.js --platform=current",
     "pretest": "npm run lint",
-    "test": "karma start",
+    "test": "standard && karma start",
     "test-watch": "karma start --no-single-run --auto-watch",
-    "ci": "npm run test && npm run e2e",
+    "ci": "npm run build && npm run test && npm run e2e",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "rimraf dist && webpack --progress --profile --bail && electron .",
     "start-watch": "rimraf dist && webpack --progress --profile --bail --watch",
@@ -87,5 +87,11 @@
     "typings": "^1.0.4",
     "url-loader": "^0.5.6",
     "webpack": "^1.13.1"
+  },
+  "standard": {
+    "globals": ["jasmine"],
+    "ignore": [
+      "src/*"
+    ]
   }
 }

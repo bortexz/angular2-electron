@@ -1,10 +1,7 @@
-var path = require('path');
-
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.config')
 
 module.exports = function (config) {
   var _config = {
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -58,7 +55,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress', 'mocha'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ["mocha", "coverage", "karma-remap-istanbul"],
+    reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
 
     // web server port
     port: 9876,
@@ -80,8 +77,7 @@ module.exports = function (config) {
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
-  };
+  }
 
-  config.set(_config);
-
-};
+  config.set(_config)
+}

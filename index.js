@@ -8,7 +8,7 @@ const BrowserWindow = electron.BrowserWindow
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-const npm_lifecycle = process.env.npm_lifecycle_event
+const npmLifecycle = process.env.npm_lifecycle_event
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
@@ -16,7 +16,7 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
 
-  if (npm_lifecycle === 'start-watch') {
+  if (npmLifecycle === 'start-watch') {
     livereload.create(mainWindow)
   }
 

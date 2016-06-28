@@ -2,12 +2,17 @@
 let os = require('os')
 let platform = os.platform()
 let arch = os.arch()
-let chromeBinary
-if (platform === 'darwin') {
-  chromeBinary = `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
-}
-else if (platform === 'linux') {
-  chromeBinary = `./out/App-linux-${arch}/App`
+let electronBinary
+switch (platform) {
+  case 'darwin':
+    electronBinary = `./out/App-darwin-${arch}/App.app/Contents/MacOS/App`
+    break
+  case 'linux':
+    electronBinary = `./out/App-linux-${arch}/App`
+    break
+  case 'win32':
+    electronBinary = `./out/App-linux-${arch}/App.exe`
+    break
 }
 
 exports.config = (function () {
@@ -36,16 +41,16 @@ exports.config = (function () {
     capabilities: {
       'browserName': 'chrome',
       chromeOptions: {
-        binary: chromeBinary
+        binary: electronBinary
       }
     },
 
     onPrepare: function () {
-      var SpecReporter = require('jasmine-spec-reporter');
+      var SpecReporter = require('jasmine-spec-reporter')
       // add jasmine spec reporter
-      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}))
 
-      // browser.ignoreSynchronization = true;
+    // browser.ignoreSynchronization = true
     },
 
     /**
@@ -56,5 +61,5 @@ exports.config = (function () {
      *
      */
     useAllAngular2AppRoots: true
-  };
+  }
 }())

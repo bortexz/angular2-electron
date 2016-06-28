@@ -1,32 +1,32 @@
 // Helper: root(), and rootDir() are defined at the bottom
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
 
 // Webpack Plugins
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-var autoprefixer = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var WebpackOnBuildPlugin = require('on-build-webpack');
-var electron = require('electron-connect').server.create();
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
+var autoprefixer = require('autoprefixer')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var WebpackOnBuildPlugin = require('on-build-webpack')
+var electron = require('electron-connect').server.create()
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test' || ENV === 'test-watch' || ENV === 'e2e';
-var isProd = ENV === 'build';
+var ENV = process.env.npm_lifecycle_event
+var isTest = ENV === 'test' || ENV === 'test-watch' || ENV === 'e2e'
+var isProd = ENV === 'build'
 var isWatching = ENV === 'start-watch'
 
-module.exports = function makeWebpackConfig() {
+module.exports = (function makeWebpackConfig () {
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
    * This is the object where all configuration gets set
    */
-  var config = {};
+  var config = {}
 
   /**
    * Devtool
@@ -34,13 +34,13 @@ module.exports = function makeWebpackConfig() {
    * Type of sourcemap to use per build type
    */
   if (isProd) {
-    config.devtool = 'source-map';
+    config.devtool = 'source-map'
   } else {
-    config.devtool = 'source-map';
+    config.devtool = 'source-map'
   }
 
   // add debug messages
-  config.debug = !isProd || !isTest;
+  config.debug = !isProd || !isTest
 
   /**
    * Entry
@@ -50,7 +50,7 @@ module.exports = function makeWebpackConfig() {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
     'app': './src/main.ts' // our angular app
-  };
+  }
 
   /**
    * Output
@@ -61,7 +61,7 @@ module.exports = function makeWebpackConfig() {
     // publicPath: isProd ? '/' : 'http://localhost:8080/',
     filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
     chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
-  };
+  }
 
   /**
    * Resolve
@@ -76,7 +76,7 @@ module.exports = function makeWebpackConfig() {
       'app': 'src/app',
       'common': 'src/common'
     }
-  };
+  }
 
   /**
    * Loaders
@@ -98,7 +98,7 @@ module.exports = function makeWebpackConfig() {
             2300, // 2300 -> Duplicate identifier
             2374, // 2374 -> Duplicate number index signature
             2375, // 2375 -> Duplicate string index signature
-            2502  // 2502 -> Referenced directly or indirectly
+            2502 // 2502 -> Referenced directly or indirectly
           ]
         },
         exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
@@ -138,7 +138,7 @@ module.exports = function makeWebpackConfig() {
     ],
     postLoaders: [],
     noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
-  };
+  }
 
   if (isTest) {
     // instrument only testing sources with Istanbul, covers ts files
@@ -147,7 +147,7 @@ module.exports = function makeWebpackConfig() {
       include: path.resolve('src'),
       loader: 'istanbul-instrumenter-loader',
       exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
-    });
+    })
 
     // needed for remap-instanbul
     config.ts = {
@@ -156,7 +156,7 @@ module.exports = function makeWebpackConfig() {
         sourceRoot: './src',
         inlineSourceMap: true
       }
-    };
+    }
   }
 
   /**
@@ -173,7 +173,7 @@ module.exports = function makeWebpackConfig() {
         ENV: JSON.stringify(ENV)
       }
     })
-  ];
+  ]
 
   if (!isTest) {
     config.plugins.push(
@@ -202,22 +202,22 @@ module.exports = function makeWebpackConfig() {
         from: root('src/public')
       }])
 
-      // Add the function to launch the electron after build succeed, from webpack
-      // Allowing live-reload aswell that way
-    );
+    // Add the function to launch the electron after build succeed, from webpack
+    // Allowing live-reload aswell that way
+    )
   }
 
   if (isWatching) {
     config.plugins.push(
-      new WebpackOnBuildPlugin(function(stats) {
+      new WebpackOnBuildPlugin(function (stats) {
         if (!config.reload) {
-          config.reload = true;
-          electron.start();
+          config.reload = true
+          electron.start()
         } else {
-          electron.reload();
+          electron.reload()
         }
       })
-    );
+    )
   }
 
   // Add build specific plugins
@@ -236,12 +236,12 @@ module.exports = function makeWebpackConfig() {
 
       new webpack.optimize.UglifyJsPlugin()
 
-      // Copy assets from the public folder
-      // Reference: https://github.com/kevlened/copy-webpack-plugin
-      // new CopyWebpackPlugin([{
-      //   from: root('src/public')
-      // }])
-    );
+    // Copy assets from the public folder
+    // Reference: https://github.com/kevlened/copy-webpack-plugin
+    // new CopyWebpackPlugin([{
+    //   from: root('src/public')
+    // }])
+    )
   }
 
   /**
@@ -253,7 +253,7 @@ module.exports = function makeWebpackConfig() {
     autoprefixer({
       browsers: ['last 2 version']
     })
-  ];
+  ]
 
   /**
    * Sass
@@ -261,8 +261,8 @@ module.exports = function makeWebpackConfig() {
    * Transforms .scss files to .css
    */
   config.sassLoader = {
-    //includePaths: [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
-  };
+    // includePaths: [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
+  }
 
   /**
    * Apply the tslint loader as pre/postLoader
@@ -271,15 +271,15 @@ module.exports = function makeWebpackConfig() {
   config.tslint = {
     emitErrors: false,
     failOnHint: false
-  };
+  }
 
-  config.target = 'electron-renderer';
+  config.target = 'electron-renderer'
 
-  return config;
-}();
+  return config
+}())
 
 // Helper functions
-function root(args) {
-  args = Array.prototype.slice.call(arguments, 0);
-  return path.join.apply(path, [__dirname].concat(args));
+function root (args) {
+  args = Array.prototype.slice.call(arguments, 0)
+  return path.join.apply(path, [__dirname].concat(args))
 }
