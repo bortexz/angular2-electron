@@ -8,7 +8,7 @@ Forked originally from https://github.com/preboot/angular2-webpack
 
 This repository adds some customization on top of the original repository to make it appropiate for electron apps instead of normal webpages.
 ## Things to do yet
-- [X] Look for a reliable method to run the e2e tests automatically
+- [x] Look for a reliable method to run the e2e tests automatically
 - [ ] Add packaging/signing scripts to npm
 
 ## Added some necessary files for electron
