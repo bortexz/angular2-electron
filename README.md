@@ -1,8 +1,8 @@
 # angular2-webpack-electron
 
-[![Build Status](https://travis-ci.org/bertofer/angular2-webpack-electron.svg?branch=master)](https://travis-ci.org/bertofer/angular2-webpack-electron)
-[![Dependency Status](https://david-dm.org/bertofer/angular2-webpack-electron.svg)](https://david-dm.org/bertofer/angular2-webpack-electron)
-[![devDependency Status](https://david-dm.org/bertofer/angular2-webpack-electron/dev-status.svg)](https://david-dm.org/bertofer/angular2-webpack-electron#info=devDependencies)
+[![Build Status](https://travis-ci.org/bertofer/angular2-electron.svg?branch=master)](https://travis-ci.org/bertofer/angular2-webpack-electron)
+[![Dependency Status](https://david-dm.org/bertofer/angular2-electron.svg)](https://david-dm.org/bertofer/angular2-electron)
+[![devDependency Status](https://david-dm.org/bertofer/angular2-electron/dev-status.svg)](https://david-dm.org/bertofer/angular2-electron#info=devDependencies)
 
 Forked originally from https://github.com/preboot/angular2-webpack
 
