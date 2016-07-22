@@ -10,6 +10,7 @@ This repository adds some customization on top of the original repository to mak
 ## Things to do yet
 - [x] Look for a reliable method to run the e2e tests automatically
 - [ ] Add packaging/signing scripts to npm
+- [ ] Separate dev, test and production webpack configurations
 
 ## Added some necessary files for electron
 - Added electron typings
