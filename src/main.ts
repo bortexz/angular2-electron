@@ -1,22 +1,18 @@
 import { enableProdMode } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
 
-import {AppComponent} from './app/app.component';
-
-const ENV_PROVIDERS = [];
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
   enableProdMode();
 }
 
-bootstrap(AppComponent, [
-    // These are dependencies of our App
-    ...HTTP_PROVIDERS,
-    ...ROUTER_PROVIDERS,
-    ...ENV_PROVIDERS,
-    { provide: LocationStrategy, useClass: HashLocationStrategy } // use #/ routes, remove this for HTML5 mode
-  ])
-  .catch(err => console.error(err));
+export function main() {
+  return platformBrowserDynamic().bootstrapModule(AppModule);
+}
+
+if (document.readyState === 'complete') {
+  main();
+} else {
+  document.addEventListener('DOMContentLoaded', main);
+}

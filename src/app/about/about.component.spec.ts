@@ -1,23 +1,23 @@
-import {
-  it,
-  describe,
-  async,
-  inject,
-  beforeEachProviders
-} from '@angular/core/testing';
+// import {
+//   it,
+//   describe,
+//   async,
+//   inject,
+//   beforeEachProviders
+// } from '@angular/core/testing';
 
-import { TestComponentBuilder } from '@angular/compiler/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { AboutComponent } from './about.component';
 
 describe('About Component', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({declarations: [AboutComponent]});
+  });
 
-  beforeEachProviders(() => []);
-
-  it('should ...', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    tcb.createAsync(AboutComponent).then((fixture) => {
-      fixture.detectChanges();
-    });
-  })));
-
+  it('should ...', () => {
+    const fixture = TestBed.createComponent(AboutComponent);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.children[0].textContent).toContain('About Works!');
+  });
 });
