@@ -8,4 +8,5 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent}
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes, { useHash: true });
+
